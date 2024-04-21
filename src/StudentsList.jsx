@@ -41,6 +41,7 @@ const StudentList = () => {
     const [filteredStudents, setFilteredStudents] = useState([]);
     const [changeStudent, setChangeStudent] = useState(0);
     const [selectedStudent, setSelectedStudent] = useState(null);
+    const [sorted, setSorted] = useState()
 
     const handleCityChange = (event) => {
         setSelectedCity(event.target.value);
@@ -85,10 +86,17 @@ const StudentList = () => {
         }
     }, [selectedUniversity, students]);
 
-    const handleSelectStudent = (student) => {
-        setSelectedStudent(student);
-        console.log('Выбранный студент:', student);
+    const handleSelectStudent = (event) => {
+        setSelectedStudent(event.target.value);
+        const studentId = event.target.value;
+        const stud = students.find(student => student._id === studentId);
+        if (stud) {
+            setSorted(stud);
+        } else {
+            console.log('Студент не найден');
+        }
     };
+
 
     return (
         <div>
@@ -124,10 +132,10 @@ const StudentList = () => {
                                 ))}
                             </Form.Select>
                             <br />
-                            <Form.Select size="lg" disabled={!selectedUniversity} onChange={handleStudentChange} aria-label="Default select example">
+                            <Form.Select size="lg" disabled={!selectedUniversity} onChange={handleSelectStudent} aria-label="Default select example">
                                 <option value="">Студентті таңдаңыз</option>
                                 {filteredStudents.map((student, index) => (
-                                    <option key={student._id} value={student._id} onClick={() => handleSelectStudent(student)}>{student.fullname}</option>
+                                    <option key={index} value={student?._id} onClick={() => handleStudentChange()}>{student?.fullname}</option>
                                 ))}
                             </Form.Select>
                         </Form>
@@ -136,11 +144,11 @@ const StudentList = () => {
                                 <Button
                                     size="lg"
                                     variant='primary'
-                                    disabled={changeStudent !== 1 || selectedStudent?.present === true}
+                                    disabled={selectedStudent === 1 || sorted?.present === true}
                                     style={{ marginTop: '24px', border: '1px solid #365C9B', backgroundColor: '#365C9B' }}
                                     className='w-100'
                                     type='submit'
-                                    onClick={() => { markAsPresent(selectedStudent?._id) }}>{selectedStudent?.present === true ? "Қатысуыңыз расталды" : "Қатысуыңызды растау"}</Button>
+                                    onClick={() => { markAsPresent(sorted?._id) }}>{sorted?.present === true ? "Қатысуыңыз расталды" : "Қатысуыңызды растау"}</Button>
                             </Col>
                             <Col lg="6" md="6" xs="12" >
                                 <a size="lg" 
