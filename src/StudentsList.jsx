@@ -95,6 +95,7 @@ const StudentList = () => {
         } else {
             console.log('Студент не найден');
         }
+        setChangeStudent(1)
     };
 
 
