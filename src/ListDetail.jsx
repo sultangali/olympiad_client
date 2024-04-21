@@ -14,7 +14,7 @@ const ListDetail = () => {
 
     const fetchStudents = async () => {
         try {
-            const response = await axios.get('http://34.88.94.240:5000/api/students');
+            const response = await axios.get('http://34.88.94.240/api/students');
             setStudents(response.data);
         } catch (error) {
             console.error('Ошибка при получении списка студентов');
