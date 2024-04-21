@@ -61,16 +61,16 @@ const StudentList = () => {
 
     const fetchStudents = async () => {
         try {
-            const response = await axios.get('http://34.88.94.240:5000/api/students');
+            const response = await axios.get('localhost:5000/api/students');
             setStudents(response.data);
         } catch (error) {
-            console.error('Ошибка при получении списка студентов');
+            console.error('Ошибка при получении списка студентов 123');
         }
     }
 
     const markAsPresent = async (id) => {
         try {
-            await axios.put(`http://34.88.94.240:5000/api/students/${id}`, { present: true });
+            await axios.put(`http://localhost:5000/api/students/${id}`, { present: true });
             await fetchStudents();
             alert('Қатысуыңыз расталды');
             window.location.reload()
