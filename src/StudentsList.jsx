@@ -95,7 +95,7 @@ const StudentList = () => {
             <Navbar fixed='top'  className="justify-content-center" >
             <Nav  className="justify-content-center" activeKey="/home">
                 <Nav.Item>
-                    <Nav.Link href="/home">
+                    <Nav.Link href="/">
                         <img src="/file.jpeg" width={'140px'} height={'140px'} alt="" />
                     </Nav.Link>
                 </Nav.Item>
